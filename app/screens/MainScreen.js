@@ -7,110 +7,45 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import colors from "../misc/colors";
 
 const MainScreen = ({ navigation }) => {
   return (
     <>
       <StatusBar />
-      <TouchableOpacity
-        style={styles.container}
-        onPress={() => navigation.navigate("GdanskieKajtki")}
-      >
-        <Text style={styles.lightHeader}>Gdańskie Kajtki</Text>
-      </TouchableOpacity>
+      <View style={styles.container}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate("GdanskieKajtki")}
+        >
+          <Text style={styles.buttonText}>Gdańskie Kajtki</Text>
+        </TouchableOpacity>
+      </View>
     </>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    paddingBottom: 30,
-    paddingTop: 20,
-    backgroundColor: "#2f3237",
-    shadowOffset: {
-      width: 0,
-      height: 12,
-    },
-    shadowOpacity: 0.58,
-    shadowRadius: 16.0,
-    elevation: 30,
-    zIndex: 1,
-  },
-  containerBottom: {
-    paddingBottom: 40,
-    paddingTop: 40,
-    backgroundColor: "#2f3237",
-    shadowOffset: {
-      width: 0,
-      height: 12,
-    },
-    shadowOpacity: 0.58,
-    shadowRadius: 16.0,
-    elevation: 30,
-    zIndex: 1,
-  },
-  mainCurrencyContainer: {
-    marginLeft: 20,
-    marginBottom: 5,
-    fontSize: 10,
-    color: "#E7F6F2",
-  },
-  checkIcon: {
-    justiftyContent: "center",
+    flex: 1,
+    textAlign: "center",
+    justifyContent: "center",
     alignItems: "center",
-    flexDirection: "row",
-    width: 20,
+    backgroundColor: colors.LIGHT,
   },
-  lightHeader: {
-    fontSize: 25,
-    textAlign: "center",
-    color: "#E7F6F2",
+  button: {
+    backgroundColor: colors.PRIMARY,
+    padding: 15,
+    borderRadius: 8,
+    elevation: 10,
+    borderWidth: 1,
+    borderColor: colors.DARK,
+    borderStyle: "dashed",
   },
-  boldHeader: {
-    fontSize: 30,
+  buttonText: {
+    fontSize: 24,
     fontWeight: "bold",
-    textAlign: "center",
-    color: "#E7F6F2",
-  },
-  debtorContainer: {
-    backgroundColor: "#557174",
-    flexDirection: "row",
-    borderRadius: 50,
-    paddingHorizontal: 15,
-    paddingVertical: 15,
-    margin: 4,
-    elevation: 2,
-  },
-  boldText: {
-    fontSize: 20,
-    color: "#E7F6F2",
-    paddingLeft: 5,
-    flex: 1,
-  },
-  addBtn: {
-    position: "absolute",
-    right: 25,
-    bottom: 20,
-    zIndex: 1,
-    backgroundColor: "#9DAD7F",
-  },
-  deleteBtn: {
-    position: "absolute",
-    left: 25,
-    bottom: 20,
-    zIndex: 1,
-    backgroundColor: "#BB6464",
-  },
-  closeBtn: {
-    position: "absolute",
-    right: 25,
-    bottom: 20,
-    zIndex: 1,
-    backgroundColor: "#9D9D9D",
-  },
-  flatListContainer: {
-    flex: 1,
-    backgroundColor: "#2f3237",
+    color: colors.DARK,
   },
 });
 

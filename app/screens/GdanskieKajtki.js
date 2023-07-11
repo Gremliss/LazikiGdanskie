@@ -4,28 +4,27 @@ import {
   Image,
   Animated,
   StyleSheet,
+  Dimensions,
   TouchableOpacity,
   Text,
 } from "react-native";
 import { ReactNativeZoomableView } from "@openspacelabs/react-native-zoomable-view";
+import colors from "../misc/colors";
+
+const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
 
 const GdanskieKajtki = (props) => {
-  const [modalVisible, setModalVisible] = useState(false);
-  const [modalVisible2, setModalVisible2] = useState(false);
+  const [hintVisible, setHintVisible] = useState(false);
+  const [hintVisible2, setHintVisible2] = useState(false);
   const zoomAnimatedValue = React.useRef(new Animated.Value(1)).current;
 
   return (
     <View style={styles.container}>
-      {/* <Text>Łaziki Gdańskie</Text> */}
       <View style={styles.box}>
         <ReactNativeZoomableView
           maxZoom={30}
-          initialZoom={1.5}
-          // Give these to the zoomable view so it can apply the boundaries around the actual content.
-          // Need to make sure the content is actually centered and the width and height are
-          // measured when it's rendered naturally. Not the intrinsic sizes.
-          // For example, an image with an intrinsic size of 400x200 will be rendered as 300x150 in this case.
-          // Therefore, we'll feed the zoomable view the 300x100 size.
+          initialZoom={1.0}
           contentWidth={400}
           contentHeight={300}
           panBoundaryPadding={50}
@@ -34,28 +33,38 @@ const GdanskieKajtki = (props) => {
           <View style={styles.contents}>
             <Image
               style={styles.img}
-              source={require("../../assets/mapaGdansk.png")}
+              source={require("../../assets/Gdańskie_Kajtki_mapa.png")}
             />
             <TouchableOpacity
-              style={styles.hint(336.5, 8.8)}
+              style={styles.hintButton(
+                windowHeight * 0.436,
+                windowWidth * 0.022
+              )}
               onPress={() =>
-                modalVisible ? setModalVisible(false) : setModalVisible(true)
+                hintVisible ? setHintVisible(false) : setHintVisible(true)
               }
             ></TouchableOpacity>
-            {modalVisible ? (
-              <View style={styles.hint2(346.5, 18.8)}>
+            {hintVisible ? (
+              <View
+                style={styles.hint(windowHeight * 0.446, windowWidth * 0.052)}
+              >
                 <Text style={styles.textStyle}>2137</Text>
               </View>
             ) : null}
 
             <TouchableOpacity
-              style={styles.hint(389.8, 31.5)}
+              style={styles.hintButton(
+                windowHeight * 0.5045,
+                windowWidth * 0.0815
+              )}
               onPress={() =>
-                modalVisible2 ? setModalVisible2(false) : setModalVisible2(true)
+                hintVisible2 ? setHintVisible2(false) : setHintVisible2(true)
               }
             ></TouchableOpacity>
-            {modalVisible2 ? (
-              <View style={styles.hint2(399.8, 41.5)}>
+            {hintVisible2 ? (
+              <View
+                style={styles.hint(windowHeight * 0.5145, windowWidth * 0.1115)}
+              >
                 <Text style={styles.textStyle}>Gremlifokkinsobotopod</Text>
               </View>
             ) : null}
@@ -71,14 +80,14 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#ead4ab",
+    backgroundColor: colors.LIGHT,
   },
   contents: {
     flex: 1,
     alignSelf: "stretch",
   },
   box: {
-    borderWidth: 1,
+    // borderWidth: 1,
     flexShrink: 1,
     height: "100%",
     width: "100%",
@@ -88,29 +97,32 @@ const styles = StyleSheet.create({
     height: "100%",
     resizeMode: "contain",
   },
-  hint: (top, left) => {
+  hintButton: (top, left) => {
     return {
       position: "absolute",
       top: top,
       left: left,
-      backgroundColor: "#78543a",
+      backgroundColor: colors.BROWN,
       borderRadius: 50,
       padding: 6,
       opacity: 0.4,
     };
   },
-  hint2: (top, left) => {
+  hint: (top, left) => {
     return {
       position: "absolute",
       top: top,
       left: left,
-      backgroundColor: "#78543a",
+      backgroundColor: colors.LIGHT,
       borderRadius: 3,
       padding: 4,
+      borderWidth: 0.5,
+      borderColor: colors.BROWN,
     };
   },
   textStyle: {
     fontSize: 4,
+    color: colors.DARK,
   },
 });
 
